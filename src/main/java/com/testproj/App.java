@@ -2,20 +2,25 @@ package com.testproj;
 
 public class App {
 
-    private static final String APP_NAME = "TestApp-Main";
-    private static final int VERSION = 3;
+    private static final String APP_NAME = "TestApp-Production";
+    private static final int VERSION = 5;
+    private static final String ENV = "production";
 
     public static void main(String[] args) {
-        System.out.println("Starting " + APP_NAME + " v" + VERSION);
+        System.out.println("[" + ENV + "] " + APP_NAME + " v" + VERSION + " starting...");
         UserService userService = new UserService();
-        userService.greetUser("Charlie");
+        userService.greetUser("Admin");
     }
 
     public static String getAppName() {
-        return APP_NAME;
+        return APP_NAME + " (" + ENV + ")";
     }
 
     public static int getVersion() {
         return VERSION;
+    }
+
+    public static String getEnvironment() {
+        return ENV;
     }
 }

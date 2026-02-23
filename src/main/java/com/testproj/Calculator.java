@@ -2,26 +2,31 @@ package com.testproj;
 
 public class Calculator {
 
-    public double add(double a, double b) {
-        return a + b;
+    public int add(int a, int b) {
+        return Math.addExact(a, b);
     }
 
-    public double subtract(double a, double b) {
-        return a - b;
+    public int subtract(int a, int b) {
+        return Math.subtractExact(a, b);
     }
 
-    public double multiply(double a, double b) {
-        return a * b;
+    public int multiply(int a, int b) {
+        return Math.multiplyExact(a, b);
     }
 
-    public double divide(double a, double b) {
-        if (b == 0.0) {
-            throw new ArithmeticException("Cannot divide by zero");
+    public double divide(int a, int b) {
+        if (b == 0) {
+            throw new ArithmeticException("Division by zero");
         }
-        return a / b;
+        return (double) a / b;
     }
 
-    public double modulo(double a, double b) {
-        return a % b;
+    public double squareRoot(double value) {
+        if (value < 0) throw new ArithmeticException("Cannot sqrt negative");
+        return Math.sqrt(value);
+    }
+
+    public int abs(int value) {
+        return Math.abs(value);
     }
 }
