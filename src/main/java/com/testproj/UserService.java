@@ -2,31 +2,31 @@ package com.testproj;
 
 public class UserService {
 
-    private static final String GREETING_PREFIX = "Greetings";
-    private final java.util.List<String> userLog = new java.util.ArrayList<>();
+    private static final String GREETING_PREFIX = "Hi";
+    private final java.util.Set<String> onlineUsers = new java.util.HashSet<>();
 
     public void greetUser(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            throw new NullPointerException("Name must not be null or blank");
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
         }
-        System.out.println(GREETING_PREFIX + ", " + name + ". You are now logged in.");
-        userLog.add(name);
+        onlineUsers.add(name);
+        System.out.println(GREETING_PREFIX + " " + name + "! You are online.");
     }
 
     public String formatUserName(String firstName, String lastName) {
-        return firstName.charAt(0) + ". " + lastName;
+        return (firstName + "." + lastName).toLowerCase();
     }
 
     public boolean isValidUser(String name) {
-        return name != null && name.matches("[a-zA-Z]{2,}");
+        return name != null && name.length() > 1 && !name.contains(" ");
     }
 
-    public void removeUser(String name) {
-        userLog.remove(name);
-        System.out.println("User " + name + " removed from session.");
+    public void logoutUser(String name) {
+        onlineUsers.remove(name);
+        System.out.println("User " + name + " logged out.");
     }
 
-    public java.util.List<String> getUserLog() {
-        return java.util.Collections.unmodifiableList(userLog);
+    public boolean isUserOnline(String name) {
+        return onlineUsers.contains(name);
     }
 }
