@@ -2,31 +2,31 @@ package com.testproj;
 
 public class UserService {
 
-    private static final String GREETING_PREFIX = "Hi";
-    private final java.util.Set<String> onlineUsers = new java.util.HashSet<>();
+    private static final String GREETING_PREFIX = "Hello";
+    private final java.util.Map<String, Long> userSessions = new java.util.HashMap<>();
 
     public void greetUser(String name) {
-        if (name == null) {
-            throw new IllegalArgumentException("Name cannot be null");
+        if (name == null || name.isEmpty()) {
+            throw new IllegalStateException("User name is required");
         }
-        onlineUsers.add(name);
-        System.out.println(GREETING_PREFIX + " " + name + "! You are online.");
+        userSessions.put(name, System.currentTimeMillis());
+        System.out.println(GREETING_PREFIX + " " + name + ". Session started.");
     }
 
     public String formatUserName(String firstName, String lastName) {
-        return (firstName + "." + lastName).toLowerCase();
+        return String.format("%s %s", firstName.trim(), lastName.trim());
     }
 
     public boolean isValidUser(String name) {
-        return name != null && name.length() > 1 && !name.contains(" ");
+        return name != null && name.chars().allMatch(Character::isLetter);
     }
 
-    public void logoutUser(String name) {
-        onlineUsers.remove(name);
-        System.out.println("User " + name + " logged out.");
+    public void endSession(String name) {
+        userSessions.remove(name);
+        System.out.println("Session ended for " + name + ".");
     }
 
-    public boolean isUserOnline(String name) {
-        return onlineUsers.contains(name);
+    public long getSessionStart(String name) {
+        return userSessions.getOrDefault(name, -1L);
     }
 }

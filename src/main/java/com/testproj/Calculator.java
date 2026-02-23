@@ -2,31 +2,30 @@ package com.testproj;
 
 public class Calculator {
 
-    public float add(float a, float b) {
-        return a + b;
+    public java.math.BigDecimal add(java.math.BigDecimal a, java.math.BigDecimal b) {
+        return a.add(b);
     }
 
-    public float subtract(float a, float b) {
-        return a - b;
+    public java.math.BigDecimal subtract(java.math.BigDecimal a, java.math.BigDecimal b) {
+        return a.subtract(b);
     }
 
-    public float multiply(float a, float b) {
-        return a * b;
+    public java.math.BigDecimal multiply(java.math.BigDecimal a, java.math.BigDecimal b) {
+        return a.multiply(b);
     }
 
-    public float divide(float a, float b) {
-        if (Float.compare(b, 0.0f) == 0) {
-            throw new ArithmeticException("Cannot divide by zero");
+    public java.math.BigDecimal divide(java.math.BigDecimal a, java.math.BigDecimal b) {
+        if (b.compareTo(java.math.BigDecimal.ZERO) == 0) {
+            throw new ArithmeticException("Division by zero");
         }
-        return a / b;
+        return a.divide(b, 10, java.math.RoundingMode.HALF_UP);
     }
 
-    public double log(double value) {
-        if (value <= 0) throw new ArithmeticException("Log of non-positive");
-        return Math.log(value);
+    public double ceil(double value) {
+        return Math.ceil(value);
     }
 
-    public float negate(float value) {
-        return -value;
+    public double floor(double value) {
+        return Math.floor(value);
     }
 }
