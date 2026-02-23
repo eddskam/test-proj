@@ -2,19 +2,23 @@ package com.testproj;
 
 public class App {
 
-    private static final String APP_NAME = "TestApp-LTS";
-    private static final int VERSION = 8;
-    private static final String ENV = "production";
+    private static final String APP_NAME = "TestApp-Feature";
+    private static final int VERSION = 4;
+    private static final boolean DEBUG = true;
 
     public static void main(String[] args) {
-        System.out.println("[LTS] " + APP_NAME + " v" + VERSION + " ready");
+        if (DEBUG) {
+            System.out.println("[DEBUG] Launching " + APP_NAME);
+        }
+        System.out.println("Welcome to " + APP_NAME + " v" + VERSION);
         UserService userService = new UserService();
-        userService.greetUser("Operator");
-        System.out.println("Healthcheck: OK");
+        userService.greetUser("Bob");
+        Calculator calc = new Calculator();
+        System.out.println("Result: " + calc.add(5, 10));
     }
 
     public static String getAppName() {
-        return APP_NAME.toLowerCase();
+        return APP_NAME + " (Feature Build)";
     }
 
     public static int getVersion() {

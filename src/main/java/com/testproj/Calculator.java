@@ -2,30 +2,33 @@ package com.testproj;
 
 public class Calculator {
 
-    public int add(int a, int b) {
-        return Math.addExact(a, b);
+    public long add(long a, long b) {
+        return a + b;
     }
 
-    public int subtract(int a, int b) {
-        return Math.subtractExact(a, b);
+    public long subtract(long a, long b) {
+        return a - b;
     }
 
-    public int multiply(int a, int b) {
-        return Math.multiplyExact(a, b);
+    public long multiply(long a, long b) {
+        return a * b;
     }
 
-    public double divide(int a, int b) {
+    public double divide(long a, long b) {
         if (b == 0) {
-            throw new ArithmeticException("Cannot divide by zero");
+            throw new IllegalArgumentException("Denominator cannot be zero");
         }
         return (double) a / b;
     }
 
-    public int max(int a, int b) {
-        return Math.max(a, b);
+    public double power(double base, double exponent) {
+        return Math.pow(base, exponent);
     }
 
-    public int min(int a, int b) {
-        return Math.min(a, b);
+    public long factorial(int n) {
+        if (n < 0) throw new IllegalArgumentException("Negative input");
+        long result = 1;
+        for (int i = 2; i <= n; i++) result *= i;
+        return result;
     }
 }
